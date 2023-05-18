@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href='/staticFiles/main.css' />
+    <link rel="icon" type="image/x-icon" href="staticFiles/images/PumpPal Icon.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+     integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+     crossorigin=""/>
+    <meta charset="UTF-8">
+    <script src="/staticFiles/scripts.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""></script>
+
+    <title>PumpPal</title>
+</head>
+<body>
+    <div id="middle-content">
+        <div class="header">
+            <div class="logo">
+                <img src="staticFiles/images/PumpPal Logo.svg">
+            </div>
+            <form class="city-gas" action="/" method="POST" enctype="multipart/form-data">
+                <select name="city" id="city">
+                    <option value="LA">Los Angeles, CA</option>
+                    <option value="SF">San Francisco, CA</option>
+                    <option value="NY">New York City, NY</option>
+                    <option value="HO">Houston, TX</option>
+                    <option value="SE">Seattle, WA</option>
+                    <option value="BOS">Boston MA</option>
+                    <option value="CLE">Cleveland, OH</option>
+                    <option value="DEN">Denver, CO</option>
+                    <option value="MIA">Miami, FL</option>
+                    <option value="ORD">Chicago, IL</option>
+                </select>
+            
+                <select name="gas" id="gas">
+                    <option value="regular">Regular</option>
+                    <option value="midgrade">Mid-Grade</option>
+                    <option value="premium">Premium</option>
+                </select>                
+            
+                <button type="submit" class="submit">Go</button>
+            </form>
+                
+        </div>
+
+        <div id="map"></div>
+    </div>
+    
+    <div class="left-content">
+        <div class="proj-info-header">
+            <h2>Project Information</h1>
+        </div>
+        <div class="proj-info-body">
+            <p id="text">
+                Python
+                <br>
+                pandas - 2.0.1
+                <br>
+                prophet - 1.1.1
+                <br>
+                flask - 2.3.2
+            </p>
+            <h3>About</h3>
+            <p id="text">PumpPal uses machine learning alongside the U.S. Energy Information Administration's API to predict
+                gas prices up to a year out on a weekly basis.
+            </p>
+            <a href="https://github.com/pclark-dev/PumpPal">GitHub</a>
+            
+            <p id="text">Created By: Peyton Clark</p>
+            <a href="https://pjkc.tk">Learn More</a>
+        </div>
+    </div>
+
+    <div class="right-content">
+        <div class="city-gas">
+            {% if city %}
+                <h3>City: {{ city }}</h3>
+            {% else %}
+                <h3>U.S.</h3>
+            {% endif %} 
+    
+            {% if gas %}
+                <h3>Gas type: {{ gas }}</h3>
+            {% else %}
+                <h3>Average</h3>
+            {% endif %}
+    
+            <h3>Current Price: ${{ current_price }}/gal</h3>
+    
+            {% for row in prediction %}
+                <p>Date: {{ row['ds'] }} <br> Predicted Price: ${{ row['yhat'] }}/gal</p>
+            {% endfor %}
+        </div>
+        
+    </div>
+    
+    
+    
+
+    <script>
+        var cityCoordinates = {
+            'LA': [34.0522, -118.2437],
+            'SF': [37.7749, -122.4194],
+            'NY': [40.7128, -74.0060],
+            'HO': [29.7604, -95.3698],
+            'SE': [47.6062, -122.3321],
+            'BOS': [42.3601, -71.0589],
+            'CLE': [41.4993, -81.6944],
+            'DEN': [39.7392, -104.9903],
+            'MIA': [25.7617, -80.1918],
+            'ORD': [41.8781, -87.6298],
+        };
+    
+        var selectedCity = '{{ city }}';  // get the selected city from Flask
+    
+        var mymap = L.map('map').setView(cityCoordinates[selectedCity], 13);
+    
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
+        }).addTo(mymap);
+    </script>
+    
+    
+</body>
+</html>
