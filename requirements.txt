@@ -1,3 +1,5 @@
+pystan==2.19.1.1
+prophet==1.1.1
 appdirs==1.4.4
 blinker==1.6.2
 brotlipy==0.7.0
@@ -33,13 +35,11 @@ pandas==2.0.1
 Pillow==9.5.0
 plotly==5.14.1
 pooch
-prophet==1.1.1
 pycparser
 PyMeeus==0.5.12
 pyOpenSSL
 pyparsing==3.0.9
 PySocks
-pystan==2.19.1.1
 python-dateutil==2.8.2
 pytz==2023.3
 requests
