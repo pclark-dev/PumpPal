@@ -1,5 +1,7 @@
-prophet==1.1.1
+numpy
+Cython==0.29.34
 pystan==2.19.1.1
+prophet==1.1.1
 appdirs==1.4.4
 blinker==1.6.2
 brotlipy==0.7.0
@@ -12,7 +14,6 @@ contourpy==1.0.7
 convertdate==2.4.0
 cryptography
 cycler==0.11.0
-Cython==0.29.34
 ephem==4.1.4
 Flask==2.3.2
 fonttools==4.39.4
@@ -29,7 +30,6 @@ korean-lunar-calendar==0.3.1
 LunarCalendar==0.0.9
 MarkupSafe==2.1.2
 matplotlib==3.7.1
-numpy
 packaging==23.1
 pandas==2.0.1
 Pillow==9.5.0
