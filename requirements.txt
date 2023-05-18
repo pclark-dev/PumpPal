@@ -1,7 +1,7 @@
+pystan==2.19.1.1 @./pystan-3.7.0.tar
+prophet==1.1.1 @./prophet-1.1.1.tar
 numpy
 Cython==0.29.34
-pystan==2.19.1.1
-prophet==1.1.1
 appdirs==1.4.4
 blinker==1.6.2
 brotlipy==0.7.0
