@@ -123,8 +123,8 @@ gasoline_types={
 
 dfAll = get_data()
 prepare_data(dfAll)
-area_filtered_df = duoareaData(dfAll, duoareas['LA'])
-gas_filtered_df = gasData(area_filtered_df, gasoline_types['regular'])
+#area_filtered_df = duoareaData(dfAll, duoareas['LA'])
+#gas_filtered_df = gasData(area_filtered_df, gasoline_types['regular'])
 #print(predictArea(gas_filtered_df))
 
 app = Flask(__name__, template_folder='templateFiles', static_folder='staticFiles')
